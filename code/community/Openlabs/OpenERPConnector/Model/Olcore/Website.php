@@ -9,68 +9,70 @@
 class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_Api_Resource
 {
 
-	public function items()
-	{
-		$websites = array();
-		foreach(Mage::app()->getWebsites(true) as $websiteId => $website)
-                    {
-        		$websites[] = $this->_websiteToArray($website);
+	public function items($filters=null)
+        {
+            try
+            {
+            $collection = Mage::getModel('core/website')->getCollection();//->addAttributeToSelect('*');
+            }
+            catch (Mage_Core_Exception $e)
+            {
+               $this->_fault('store_not_exists');
+            }
+
+            if (is_array($filters)) {
+                try {
+                    foreach ($filters as $field => $value) {
+                        $collection->addFieldToFilter($field, $value);
                     }
-			
-			return $websites;
-	}
-        public function info($websiteIds = null)
+                } catch (Mage_Core_Exception $e) {
+                    $this->_fault('filters_invalid', $e->getMessage());
+                    // If we are adding filter on non-existent attribute
+                }
+            }
+
+            $result = array();
+            foreach ($collection as $customer) {
+                $result[] = $customer->toArray();
+            }
+
+            return $result;
+        }
+
+	public function info($storeIds = null)
 	{
-            if(is_integer($websiteIds))
+		$stores = array();
+
+		if(is_array($storeIds))
+		{
+			foreach($storeIds as $storeId)
+			{
+				try
+                                {
+                                    $stores[] = Mage::getModel('core/website')->load($storeId)->toArray();
+				}
+                                catch (Mage_Core_Exception $e)
+                                {
+                                    $this->_fault('store_not_exists');
+                                }
+                        }
+                        return $stores;
+		}
+                elseif(is_numeric($storeIds))
 		{
 			try
                         {
-                            return $this->_websiteToArray(Mage::app()->getWebsite($websiteIds));
+                            return Mage::getModel('core/website')->load($storeIds)->toArray();
 			}
                         catch (Mage_Core_Exception $e)
                         {
-                            $this->_fault('website_not_exists',$e->getMessage());
-                        }
-                        catch (Exception $e)
-                        {
-                            $this->_fault('website_not_exists',$e->getMessage());
+                            $this->_fault('store_not_exists');
                         }
 
-          }
-          elseif(is_array($websiteIds))
-          {
-                $websites = array();
-                foreach ($websiteIds as $websiteid)
-                {
-                    try
-                        {
-				$websites[] = $this->_websiteToArray(Mage::app()->getWebsite($websiteid));
-			}
-                        catch (Mage_Core_Exception $e)
-                        {
-                            $this->_fault('website_not_exists',$e->getMessage());
-                        }
-                        catch (Exception $e)
-                        {
-                            $this->_fault('website_not_exists',$e->getMessage());
-                        }
                 }
-                return $websites;
-          }
-	}
+
+        }
 	//This is a protected function used by items & info for fetching website information
-	protected function _websiteToArray($website)
-	{
-		return array(                   'website_id' 		=> $website->getWebsiteId(),
-						'code'			=> $website->getCode(),		
-						'name'			=> $website->getName(),		
-						'sort_order'		=> $website->getSortOrder(),
-						'default_group_id'	=> $website->getDefaultGroupId(),
-						'is_default'		=> $website->getIsDefault(),
-						'group_ids'		=> $website->getGroupIds()
-						);
-	}
-	
 	
 	public function create($websitedata)
         {
