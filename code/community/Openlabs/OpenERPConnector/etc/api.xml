@@ -77,6 +77,10 @@
                         <code>102</code>
                         <message>Store creation failed due to invalid data.</message>
                     </data_invalid>
+                    <filters_invalid>
+                        <code>103</code>
+                        <message>Invalid data fetch filter.</message>
+                    </filters_invalid>
                 </faults>
             </ol_stores>
         </resources>
