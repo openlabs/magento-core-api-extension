@@ -6,9 +6,24 @@
  * @copyright 2009
  */
 
-class Openlabs_OpenERPConnector_Model_Olcore_Store extends Mage_Catalog_Model_Api_Resource
+class Openlabs_OpenERPConnector_Model_Olcore_Storeviews extends Mage_Catalog_Model_Api_Resource
 {
-
+        public function items()
+	{
+                $stores = array();
+                try
+                {
+                    foreach(Mage::app()->getStores(true) as $storeId => $store)
+			{
+				$stores[] = $this->_storeToArray($store);
+			}
+                }
+                catch (Mage_Core_Exception $e)
+                {
+                    $this->_fault('store_not_exists');
+                }
+                return $stores;
+        }
 	public function info($storeIds = null)
 	{
 		$stores = array();
@@ -26,6 +41,7 @@ class Openlabs_OpenERPConnector_Model_Olcore_Store extends Mage_Catalog_Model_Ap
                                     $this->_fault('store_not_exists');
                                 }
                         }
+                        return $stores;
 		}
                 elseif(is_numeric($storeIds))
 		{
@@ -39,26 +55,8 @@ class Openlabs_OpenERPConnector_Model_Olcore_Store extends Mage_Catalog_Model_Ap
                         }
 
                 }
-		return $stores;
+		
         }
-
-
-        public function items($storeIds = null)
-	{
-		try
-                {
-                    foreach(Mage::app()->getStores(true) as $storeId => $store)
-			{
-				$stores[] = $this->_storeToArray($store);
-			}
-                }
-                catch (Mage_Core_Exception $e)
-                {
-                    $this->_fault('store_not_exists');
-                }
-                return $stores;
-        }
-
 
 	protected function _storeToArray($store)
 	{
@@ -144,7 +142,5 @@ class Openlabs_OpenERPConnector_Model_Olcore_Store extends Mage_Catalog_Model_Ap
             }
             return true;
         }
-      
-	
 }
 ?>

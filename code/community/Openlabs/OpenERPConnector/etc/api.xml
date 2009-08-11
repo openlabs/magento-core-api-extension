@@ -28,10 +28,6 @@
                         <title>Delete websites</title>
                         <method>delete</method>
                     </delete>
-                    <tree translate="title" module="core">
-                        <title>Tree of websites</title>
-                        <method>tree</method>
-                    </tree>
                 </methods>
                 <faults module="core">
                     <website_not_exists>
@@ -44,6 +40,45 @@
                     </data_invalid>
                 </faults>
             </ol_websites>
+            
+            <ol_stores translate="title" module="core">
+                <title>Stores Management</title>
+                <model>openerpconnector/olcore_storeviews</model>
+                <acl>core/store</acl>
+                <methods>
+                    <list translate="title" module="core">
+                        <title>Enumerate stores</title>
+                        <method>items</method>
+                    </list>
+                    <create translate="title" module="core">
+                        <title>Create stores</title>
+                        <!--Parameters are code,name,is_default,sort_order,default_group_id,group_ids-->
+                        <method>create</method>
+                    </create>
+                    <info translate="title" module="core">
+                        <title>Fetch detail of stores</title>
+                        <method>info</method>
+                    </info>
+                    <update translate="title" module="core">
+                        <title>Update stores info</title>
+                        <method>update</method>
+                    </update>
+                    <delete translate="title" module="core">
+                        <title>Delete stores</title>
+                        <method>delete</method>
+                    </delete>
+                </methods>
+                <faults module="core">
+                    <store_not_exists>
+                        <code>101</code>
+                        <message>Requested store not found.</message>
+                    </store_not_exists>
+                    <data_invalid>
+                        <code>102</code>
+                        <message>Store creation failed due to invalid data.</message>
+                    </data_invalid>
+                </faults>
+            </ol_stores>
         </resources>
     </api>
 </config>

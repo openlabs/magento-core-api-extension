@@ -19,7 +19,6 @@ class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_
 			
 			return $websites;
 	}
-
         public function info($websiteIds = null)
 	{
             if(is_integer($websiteIds))
