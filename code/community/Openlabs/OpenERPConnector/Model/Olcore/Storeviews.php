@@ -72,7 +72,7 @@ class Openlabs_OpenERPConnector_Model_Olcore_Storeviews extends Mage_Catalog_Mod
 		
         }
 
-        public function create($storeedata)
+        public function create($storedata)
         {
             try
             {

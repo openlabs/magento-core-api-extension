@@ -72,7 +72,7 @@ class Openlabs_OpenERPConnector_Model_Olcore_Groups extends Mage_Catalog_Model_A
 		
         }
 
-        public function create($groupedata)
+        public function create($groupdata)
         {
             try
             {
