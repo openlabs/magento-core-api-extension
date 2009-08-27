@@ -186,7 +186,7 @@
 					</not_removed>
 					<not_media>
 						<code>107</code>
-						<message>Requested product doesn't support images</message>
+						<message>Error in opening image file</message>
 					</not_media>
 					<filters_invalid>
 						<code>108</code>

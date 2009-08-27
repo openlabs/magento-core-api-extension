@@ -7,7 +7,8 @@
  * @copyright 2009
  */
 
-class Openlabs_OpenERPConnector_Model_Olcatalog_Categories extends Mage_Catalog_Model_Api_Resource {
+class Openlabs_OpenERPConnector_Model_Olcatalog_Categories extends Mage_Catalog_Model_Api_Resource 
+{
 	public function items($filters = null) {
 		try {
 			$collection = Mage :: getModel('catalog/category/attribute')->getCollection()->addAttributeToSelect('image');
@@ -53,7 +54,7 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Categories extends Mage_Catalog_
 								$img_data = base64_encode($imagebin);
 								fclose($fp);
 							} catch (Exception $e) {
-								return "exc proc";
+								$this->_fault('not_media');
 							}
 						}
 						$result[] = array (
@@ -74,23 +75,25 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Categories extends Mage_Catalog_
 
 	}
 
-	public function create($filename, $imagedata) {
-		if ($filename and $imagedata) {
-			try {
-				if ($filename) {
-					$path = Mage :: getBaseDir('media') . DS . 'catalog' . DS . 'category' . DS;
-					$fullpath = $path . $filename;
-					try {
-						$fp = fopen($fullpath, "wb");
-						$image = fwrite($fp, base64_decode($imagedata));
-						fclose($fp);
-					} catch (Exception $e) {
-						return "exc proc";
-					}
-				}
-				return true;
-			}
+public function create($filename,$imgdata) {
+	if ($filename)
+	{
+		$path = Mage :: getBaseDir('media') . DS . 'catalog' . DS . 'category' . DS;
+		$fullpath = $path . $filename;
+		try
+		{
+			$fp = fopen($fullpath, "wb");
+			$img_data = base64_decode($imgdata);
+			//return $img_data;
+			$imagebin = fwrite($fp,$img_data);
+			fclose($fp);
 		}
+		catch (Exception $e) 
+		{
+			$this->_fault('not_created');
+		}
+		return true;
 	}
+}
 }
 ?>
