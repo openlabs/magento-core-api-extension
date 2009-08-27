@@ -129,29 +129,26 @@
 				<model>openerpconnector/olcatalog_categories</model>
 				<acl>catalog/category</acl>
 				<methods>
-					<currentStore translate="title" module="catalog">
-						<title>Set/Get current store view</title>
-					</currentStore>
 					<list translate="title" module="catalog">
 						<title>Retrieve product image list</title>
 						<method>items</method>
 					</list>
 					<info translate="title" module="catalog">
-						<title>Retrieve product image</title>
+						<title>Retrieve product category image</title>
 					</info>
 					<types translate="title" module="catalog">
-						<title>Retrieve product image types</title>
+						<title>Retrieve product category image types</title>
 					</types>
 					<create translate="title" module="catalog">
-						<title>Upload new product image </title>
+						<title>Upload new product category image </title>
 						<acl>catalog/product/media/create</acl>
 					</create>
 					<update translate="title" module="catalog">
-						<title>Update product image</title>
+						<title>Update product category image</title>
 						<acl>catalog/product/media/update</acl>
 					</update>
 					<remove translate="title" module="catalog">
-						<title>Remove product image</title>
+						<title>Remove product category image</title>
 						<acl>catalog/product/media/remove</acl>
 					</remove>
 				</methods>

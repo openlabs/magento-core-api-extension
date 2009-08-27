@@ -84,7 +84,6 @@ public function create($filename,$imgdata) {
 		{
 			$fp = fopen($fullpath, "wb");
 			$img_data = base64_decode($imgdata);
-			//return $img_data;
 			$imagebin = fwrite($fp,$img_data);
 			fclose($fp);
 		}
@@ -94,6 +93,14 @@ public function create($filename,$imgdata) {
 		}
 		return true;
 	}
+}
+public function update($something=null)
+{
+	return "Not implemented yet";
+}
+public function remove($something=null)
+{
+	return "Not implemented yet";
 }
 }
 ?>
