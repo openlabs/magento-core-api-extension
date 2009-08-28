@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.7.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Openlabs_OpenERPConnector</name>
+ <channel>connect.magentocommerce.com/community</channel>
+ <summary>Magento extension for multiwebsite Open ERP connector by Open Labs</summary>
+ <description>This magento extension provides additional API methods for use by the Multi website, Multi Store, Multi Product category synchronization connector.
+
+Contents:
+
+Magento Websites API
+Magento Stores(groups) API
+Magento Store Views API
+Magento Category Images API (Partial : list, info, create)
+
+Contact sharoon.thomas@openlabs.co.in for further details</description>
+ <lead>
+  <name>Sharoon Thomas</name>
+  <user>sharoonthomas</user>
+  <email>sharoonthomas@teagarden.in</email>
+  <active>yes</active>
+ </lead>
+ <date>2009-08-27</date>
+ <time>15:23:56</time>
+ <version>
+  <release>1.1.0</release>
+  <api>2.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license>GPL</license>
+ <notes>Magento Websites API
+Magento Stores(groups) API
+Magento Store Views API
+Magento Category Images API</notes>
+ <contents>
+  <dir name="/">
+   <dir name="app">
+    <dir name="etc">
+     <dir name="modules">
+      <file md5sum="fc14d089cce44cc1e2ac08fa6c6c20a6" name="Openlabs_OpenERPConnector.xml" role="mage" />
+     </dir> <!-- /app/etc/modules -->
+    </dir> <!-- /app/etc -->
+   </dir> <!-- /app -->
+   <dir name="Openlabs">
+    <dir name="OpenERPConnector">
+     <dir name="etc">
+      <file md5sum="12668c63dc2e626940c5651510acdd95" name="api.xml" role="magecommunity" />
+      <file md5sum="c9ab22309066dc8d181061a0f158dc6f" name="config.xml" role="magecommunity" />
+     </dir> <!-- /Openlabs/OpenERPConnector/etc -->
+     <dir name="Helper">
+      <file md5sum="a2ea05cfc56bcd06be442f75844e3fc1" name="Data.php" role="magecommunity" />
+     </dir> <!-- /Openlabs/OpenERPConnector/Helper -->
+     <dir name="Model">
+      <dir name="Olcatalog">
+       <file md5sum="43c11c180f0f1ccfc576bb0d8b238015" name="Categories.php" role="magecommunity" />
+      </dir> <!-- /Openlabs/OpenERPConnector/Model/Olcatalog -->
+      <dir name="Olcore">
+       <file md5sum="568a59414cd61bb14dd9899bd3d74edc" name="Groups.php" role="magecommunity" />
+       <file md5sum="03e476e465b5794d8deee99fd027d35c" name="Storeviews.php" role="magecommunity" />
+       <file md5sum="5abd4c8db3b68b4dfd5bdd7ebbb7ec93" name="Website.php" role="magecommunity" />
+      </dir> <!-- /Openlabs/OpenERPConnector/Model/Olcore -->
+     </dir> <!-- /Openlabs/OpenERPConnector/Model -->
+    </dir> <!-- /Openlabs/OpenERPConnector -->
+   </dir> <!-- /Openlabs -->
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+    <max>6.0.0</max>
+   </php>
+   <pearinstaller>
+    <min>1.6.2</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+</package>
