@@ -191,6 +191,27 @@
 					</filters_invalid>
 				</faults>
 			</ol_catalog_category_media>
+			<ol_catalog_product_attribute translate="title" module="catalog">
+				<title>Product Images API</title>
+				<model>openerpconnector/olcatalog_product_attribute</model>
+				<acl>catalog/category</acl>
+				<methods>
+					<list translate="title" module="catalog">
+						<title>Retrieve attribute list</title>
+						<method>items</method>
+					</list>
+					<relations translate="title" module="catalog">
+						<title>Retrieve attribute sets attribute ids</title>
+						<method>relations</method>
+					</relations>
+					<info translate="title" module="catalog">
+						<title>Retrieve full attribute details</title>
+						<method>info</method>
+					</info>
+				</methods>
+				<faults>
+				</faults>
+			</ol_catalog_product_attribute>
 		</resources>
 	</api>
 </config>
