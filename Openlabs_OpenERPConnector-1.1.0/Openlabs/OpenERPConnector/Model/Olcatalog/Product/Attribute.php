@@ -26,7 +26,7 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Product_Attribute extends Mage_C
 		$result = array ();
 		foreach ($attributes as $attribute){
 			$result[] = Array(
-						'att_id' => $attribute->getId()
+						'attribute_id' => $attribute->getId()
 							);
 		}
 		return $result;

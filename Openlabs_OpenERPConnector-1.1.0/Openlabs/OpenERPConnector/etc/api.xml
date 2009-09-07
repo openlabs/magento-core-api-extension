@@ -212,6 +212,23 @@
 				<faults>
 				</faults>
 			</ol_catalog_product_attribute>
+			<ol_catalog_product_attribute_group translate="title" module="catalog">
+				<title>Product Images API</title>
+				<model>openerpconnector/olcatalog_product_attributegroup</model>
+				<acl>catalog/category</acl>
+				<methods>
+					<list translate="title" module="catalog">
+						<title>Retrieve attribute group list</title>
+						<method>items</method>
+					</list>
+					<info translate="title" module="catalog">
+						<title>Retrieve full attribute details</title>
+						<method>info</method>
+					</info>
+				</methods>
+				<faults>
+				</faults>
+			</ol_catalog_product_attribute_group>
 		</resources>
 	</api>
 </config>
