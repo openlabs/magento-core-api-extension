@@ -61,7 +61,7 @@ class Openlabs_OpenERPConnector_Model_Olcustomer_Group extends Mage_Catalog_Mode
 		{
 			try
                         {
-                            return Mage::getModel('core/store_group')->load($groupIds)->toArray();
+                            return Mage::getModel('customer/group')->load($groupIds)->toArray();
 			}
                         catch (Mage_Core_Exception $e)
                         {
