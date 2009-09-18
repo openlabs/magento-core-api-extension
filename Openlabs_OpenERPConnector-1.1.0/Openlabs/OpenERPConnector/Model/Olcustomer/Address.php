@@ -60,7 +60,10 @@ class Openlabs_OpenERPConnector_Model_Olcustomer_Address extends Mage_Customer_M
 
         $result = array();
         foreach ($customer->getAddresses() as $address) {
-            $result[] = $address->toArray();
+            $data = $address->toArray();
+            $data['default_billing'] = $customer->getDefaultBilling() == $address->getId();
+            $data['default_shipping'] = $customer->getDefaultShipping() == $address->getId();
+            $result[] = $data;
             /*$data = $address->toArray();
             $row  = array();
 

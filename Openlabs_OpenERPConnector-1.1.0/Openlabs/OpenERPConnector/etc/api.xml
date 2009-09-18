@@ -208,6 +208,10 @@
 						<title>Retrieve full attribute details</title>
 						<method>info</method>
 					</info>
+					<options translate="title" module="catalog">
+						<title>Retrieve options of attributes</title>
+						<method>options</method>
+					</options>
 				</methods>
 				<faults>
 				</faults>
@@ -311,6 +315,72 @@
 					</filters_invalid>
 				</faults>
 			</ol_customer_address>
+			<ol_customer translate="title" module="core">
+				<title>Customers Management</title>
+				<model>openerpconnector/olcustomer_customer</model>
+				<acl>customer/group</acl>
+				<methods>
+					<list translate="title" module="core">
+						<title>Enumerate Customers</title>
+						<method>items</method>
+					</list>
+					<create translate="title" module="core">
+						<title>Create Customers</title>
+						<method>create</method>
+					</create>
+					<info translate="title" module="core">
+						<title>Fetch detail of customers</title>
+						<method>info</method>
+					</info>
+					<update translate="title" module="core">
+						<title>Update customers info</title>
+						<method>update</method>
+					</update>
+					<delete translate="title" module="core">
+						<title>Delete customers</title>
+						<method>delete</method>
+					</delete>
+				</methods>
+				<faults module="core">
+					<customer_not_exists>
+						<code>101</code>
+						<message>Requested customer not found.</message>
+					</customer_not_exists>
+					<data_invalid>
+						<code>102</code>
+						<message>Customer creation failed due to invalid data.</message>
+					</data_invalid>
+					<filters_invalid>
+						<code>103</code>
+						<message>Invalid data fetch filter.</message>
+					</filters_invalid>
+				</faults>
+			</ol_customer>
+			<ol_catalog_product_tierprice translate="title" module="catalog">
+				<title>Product Tier Price API</title>
+				<model>openerpconnector/olcatalog_product_tierprice</model>
+				<acl>catalog/category</acl>
+				<methods>
+					<list translate="title" module="catalog">
+						<title>Retrieve attribute list</title>
+						<method>items</method>
+					</list>
+					<items2 translate="title" module="catalog">
+						<title>Retrieve attribute list</title>
+						<method>items2</method>
+					</items2>
+				</methods>
+				<faults>
+					<product_not_exists>
+						<code>101</code>
+						<message>Requested product not found.</message>
+					</product_not_exists>
+					<filters_invalid>
+						<code>103</code>
+						<message>Invalid data fetch filter.</message>
+					</filters_invalid>
+				</faults>
+			</ol_catalog_product_tierprice>
 		</resources>
 	</api>
 </config>

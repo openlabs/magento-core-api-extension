@@ -89,18 +89,18 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Product_Attribute extends Mage_C
 		if (!$attribute) {
 			$this->_fault('not_exists');
 		}
+
 		$options = array ();
-		if ($attribute->usesSource()) {
 			foreach ($attribute->getSource()->getAllOptions() as $optionId => $optionValue) {
 				if (is_array($optionValue)) {
 					$options[] = $optionValue;
-				} else {
+				} 
+				else {
 					$options[] = array (
 						'value' => $optionId,
 						'label' => $optionValue
 					);
 				}
-			}
 		}
 		return $options;
 	}
