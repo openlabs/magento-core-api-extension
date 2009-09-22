@@ -381,6 +381,72 @@
 					</filters_invalid>
 				</faults>
 			</ol_catalog_product_tierprice>
+			<ol_catalog_product translate="title" module="core">
+				<title>Address Management</title>
+				<model>openerpconnector/olcatalog_products</model>
+				<acl>catalog/product</acl>
+				<methods>
+					<list translate="title" module="core">
+						<title>Enumerate Products</title>
+						<method>items</method>
+					</list>
+					<create translate="title" module="core">
+						<title>Create Products</title>
+						<method>create</method>
+					</create>
+					<biglist translate="title" module="core">
+						<title>Fetch detail of products</title>
+						<method>biglist</method>
+					</biglist>
+					<update translate="title" module="core">
+						<title>Update groups info</title>
+						<method>update</method>
+					</update>
+					<delete translate="title" module="core">
+						<title>Delete groups</title>
+						<method>delete</method>
+					</delete>
+				</methods>
+				<faults module="core">
+					<customer_not_exists>
+						<code>101</code>
+						<message>Requested Customer not found.</message>
+					</customer_not_exists>
+					<data_invalid>
+						<code>102</code>
+						<message>group creation failed due to invalid data.</message>
+					</data_invalid>
+					<filters_invalid>
+						<code>103</code>
+						<message>Invalid data fetch filter.</message>
+					</filters_invalid>
+				</faults>
+			</ol_catalog_product>
+			<ol_catalog_product_attributeset translate="title" module="core">
+				<title>Attribute Set Management</title>
+				<model>openerpconnector/olcatalog_product_attributeset</model>
+				<acl>catalog/product</acl>
+				<methods>
+					<list translate="title" module="core">
+						<title>Enumerate Attribute sets</title>
+						<method>items</method>
+					</list>
+				</methods>
+				<faults module="core">
+					<customer_not_exists>
+						<code>101</code>
+						<message>Requested Customer not found.</message>
+					</customer_not_exists>
+					<data_invalid>
+						<code>102</code>
+						<message>group creation failed due to invalid data.</message>
+					</data_invalid>
+					<filters_invalid>
+						<code>103</code>
+						<message>Invalid data fetch filter.</message>
+					</filters_invalid>
+				</faults>
+			</ol_catalog_product_attributeset>
 		</resources>
 	</api>
 </config>
