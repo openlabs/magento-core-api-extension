@@ -49,16 +49,16 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Product_Attribute extends Mage_C
 					$scope = 'store';
 				}
 
-				$result[] = array (
+				/*$result[] = array (
 					'attribute_id' => $attribute->getId(),
 					'code' => $attribute->getAttributeCode(),
 					'type' => $attribute->getFrontendInput(),
 					'required' => $attribute->getIsRequired(),
 					'attributeset' => $attribute->getattribute_set_info(),
 					'scope' => $scope
-				);
+				);*/
 				//Override hooray
-				//$result[]=$attribute->toArray();
+				$result[]=$attribute->toArray();
 			}
 		}
 
@@ -67,11 +67,11 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Product_Attribute extends Mage_C
 
 	public function info($attributeId) {
 		try {
+			return 'hello';
 			$attribute = Mage :: getModel('catalog/product')->getResource()->getAttribute($attributeId);
-			$result = array ();
 			return $attribute->toArray();
 		} catch (Exception $e) {
-			return $result;
+			$this->_fault('not_exists');
 		}
 	}
 	/**
