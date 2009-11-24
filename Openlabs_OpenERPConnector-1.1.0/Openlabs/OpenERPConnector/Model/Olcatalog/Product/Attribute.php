@@ -58,6 +58,7 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Product_Attribute extends Mage_C
 					'scope' => $scope
 				);*/
 				//Override hooray
+				$attribute['scope'] = $scope;
 				$result[]=$attribute->toArray();
 			}
 		}
