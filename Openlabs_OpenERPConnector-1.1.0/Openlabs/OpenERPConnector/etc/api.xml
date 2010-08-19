@@ -315,6 +315,47 @@
 					</filters_invalid>
 				</faults>
 			</ol_customer_address>
+			<ol_customer_subscriber translate="title" module="core">
+				<title>Subscriber Management</title>
+				<model>openerpconnector/olcustomer_subscriber</model>
+				<acl>customer/group</acl>
+				<methods>
+					<list translate="title" module="core">
+						<title>Enumerate subscriber</title>
+						<method>items</method>
+					</list>
+					<create translate="title" module="core">
+						<title>Create subscriber</title>
+						<method>create</method>
+					</create>
+					<info translate="title" module="core">
+						<title>Fetch detail of subscriber</title>
+						<method>info</method>
+					</info>
+					<update translate="title" module="core">
+						<title>Update subscriber info</title>
+						<method>update</method>
+					</update>
+					<delete translate="title" module="core">
+						<title>Delete subscriber</title>
+						<method>delete</method>
+					</delete>
+				</methods>
+				<faults module="core">
+					<customer_not_exists>
+						<code>101</code>
+						<message>Requested Customer not found.</message>
+					</customer_not_exists>
+					<data_invalid>
+						<code>102</code>
+						<message>group creation failed due to invalid data.</message>
+					</data_invalid>
+					<filters_invalid>
+						<code>103</code>
+						<message>Invalid data fetch filter.</message>
+					</filters_invalid>
+				</faults>
+			</ol_customer_subscriber>
 			<ol_customer translate="title" module="core">
 				<title>Customers Management</title>
 				<model>openerpconnector/olcustomer_customer</model>
