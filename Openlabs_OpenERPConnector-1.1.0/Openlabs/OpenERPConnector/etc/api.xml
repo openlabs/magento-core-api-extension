@@ -488,6 +488,28 @@
 					</filters_invalid>
 				</faults>
 			</ol_catalog_product_attributeset>
+			<sales_order translate="title" module="Openlabs_OpenERPConnector">
+                <model>sales/order_api</model>
+                <title>Custom Sales Orders API</title>
+                <methods>
+                    <retrieve translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Retrieve list of orders by filters, nb max, etc...</title>
+                        <method>retrieveOrders</method>
+                    </retrieve>
+                    <done translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Set Flag to TRUE for imported orders</title>
+                        <method>setFlagForOrder</method>
+                    </done>
+                    <get_child translate="title" module="Openlabs_OpenERPConnector">
+                    	<title>get The Child of The Order Edited</title>
+                        <method>getOrderChild</method>
+                    </get_child>
+                    <get_parent translate="title" module="Openlabs_OpenERPConnector">
+                    	<title>get The Parent of the order annulated</title>
+                        <method>getOrderParent</method>
+                    </get_parent>
+                </methods>
+           </sales_order>
 		</resources>
 	</api>
 </config>

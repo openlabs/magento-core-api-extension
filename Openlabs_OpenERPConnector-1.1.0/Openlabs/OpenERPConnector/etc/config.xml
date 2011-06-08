@@ -1,15 +1,31 @@
 <?xml version="1.0"?>
 <config>
-    <!--<modules>
+    <modules>
         <Openlabs_OpenERPConnector>
             <version>0.0.1</version>
         </Openlabs_OpenERPConnector>
-    </modules>-->
+    </modules>
+    <frontend>
+    	<routers>
+            <openerpconnector>
+                <use>standard</use>
+                <args>
+                    <module>Openlabs_OpenERPConnector</module>
+                    <frontName>openerpconnector</frontName>
+                </args>
+            </openerpconnector>
+        </routers>
+    </frontend>
     <global>
         <models>
             <openerpconnector>
                 <class>Openlabs_OpenERPConnector_Model</class>
             </openerpconnector>
+            <sales>
+    			<rewrite>
+    				<order_api>Openlabs_OpenERPConnector_Model_Sales_Order_Api</order_api>
+    			</rewrite>
+    		</sales>
         </models>
         <resources>
             <openerpconnector_setup>
