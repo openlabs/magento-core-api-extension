@@ -26,6 +26,11 @@
     				<order_api>Openlabs_OpenERPConnector_Model_Sales_Order_Api</order_api>
     			</rewrite>
     		</sales>
+    		<catalog>
+    			<rewrite>
+    				<product_api>Openlabs_OpenERPConnector_Model_Catalog_Product_Api</product_api>
+    			</rewrite>
+    		</catalog>
         </models>
         <resources>
             <openerpconnector_setup>

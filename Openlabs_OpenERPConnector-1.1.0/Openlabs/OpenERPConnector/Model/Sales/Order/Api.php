@@ -1,40 +1,29 @@
 <?php
 
+/**
+ * 
+ * @author 	Mohammed NAHHAS
+ * @package Openlabs_OpenERPConnector
+ *
+ */
+
 class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_Order_Api {
 	
+	/**
+	 * 
+	 * Retrieve orders data based on the value of the flag 'imported'
+	 * @param  array
+	 * @return array
+	 */
 	public function retrieveOrders($data) {
 			        
 	    $result = array();
 		if(isset($data['imported'])) {
-			$billingAliasName = 'billing_o_a';
-	        $shippingAliasName = 'shipping_o_a';
 	        
 	        $collection = Mage::getModel("sales/order")->getCollection()
 	            ->addAttributeToSelect('*')
 	            ->addAttributeToFilter('imported', array('eq' => $data['imported']))
-	            ->addAddressFields()
-	            ->addExpressionFieldToSelect(
-	                'billing_firstname', "{{billing_firstname}}", array('billing_firstname'=>"$billingAliasName.firstname")
-	            )
-	            ->addExpressionFieldToSelect(
-	                'billing_lastname', "{{billing_lastname}}", array('billing_lastname'=>"$billingAliasName.lastname")
-	            )
-	            ->addExpressionFieldToSelect(
-	                'shipping_firstname', "{{shipping_firstname}}", array('shipping_firstname'=>"$shippingAliasName.firstname")
-	            )
-	            ->addExpressionFieldToSelect(
-	                'shipping_lastname', "{{shipping_lastname}}", array('shipping_lastname'=>"$shippingAliasName.lastname")
-	            )
-	            ->addExpressionFieldToSelect(
-	                    'billing_name',
-	                    "CONCAT({{billing_firstname}}, ' ', {{billing_lastname}})",
-	                    array('billing_firstname'=>"$billingAliasName.firstname", 'billing_lastname'=>"$billingAliasName.lastname")
-	            )
-	            ->addExpressionFieldToSelect(
-	                    'shipping_name',
-	                    'CONCAT({{shipping_firstname}}, " ", {{shipping_lastname}})',
-	                    array('shipping_firstname'=>"$shippingAliasName.firstname", 'shipping_lastname'=>"$shippingAliasName.lastname")
-	            );
+	            ->addAddressFields();
 	            
 	        if(isset($data['limit'])) {
 	        	$collection->setPageSize($data['limit']);
@@ -68,7 +57,7 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
         }
 	}
 	
-	/* Récupère l'increment_id de la commande fille créée, retourne un string exemple : 100004997-1 */
+	/* Retrieve increment_id of the child order */
     public function getOrderChild($incrementId) {
     	
         $order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
@@ -86,7 +75,7 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
         }
     }
     
-    /* Récupère l'increment_id de la commande mère annulée, retourne un string exemple : 100004997 */
+    /* Retrieve increment_id of the parent order */
     public function getOrderParent($incrementId) {
     	
     	$order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);

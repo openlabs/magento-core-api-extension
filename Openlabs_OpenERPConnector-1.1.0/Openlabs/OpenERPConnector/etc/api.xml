@@ -510,6 +510,17 @@
                     </get_parent>
                 </methods>
            </sales_order>
+           <catalog_product translate="title" module="catalog">
+				<title>Product API</title>
+                <model>catalog/product_api</model>
+                <acl>catalog/product</acl>
+                <methods>
+                	<create_bundle translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Create Bundle Products with Custom Options and Bundle Items</title>
+                        <method>createBundleProducts</method>
+                    </create_bundle>
+                </methods>
+           </catalog_product>
 		</resources>
 	</api>
 </config>
