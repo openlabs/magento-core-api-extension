@@ -62,5 +62,27 @@
                 <class>Openlabs_OpenERPConnector_Helper</class>
             </openerpconnector>
         </helpers>
+        <events>
+        	<sales_order_place_after>
+        		<observers>
+        			<init_imported_after_place_order>
+        				<type>singleton</type>
+		            	<class>openerpconnector/observer</class>
+		            	<method>initImported</method>
+        			</init_imported_after_place_order>
+        		</observers>
+        	</sales_order_place_after>
+        </events>
     </global>
+    <admin>
+        <routers>
+			<openerpconnector>
+				<use>admin</use>
+				<args>
+					<module>Openlabs_OpenERPConnector</module>
+					<frontName>connector</frontName>
+				</args>
+			</openerpconnector>
+        </routers>
+    </admin>
 </config>

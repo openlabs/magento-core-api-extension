@@ -22,8 +22,12 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
 	        
 	        $collection = Mage::getModel("sales/order")->getCollection()
 	            ->addAttributeToSelect('*')
-	            ->addAttributeToFilter('imported', array('eq' => $data['imported']))
-	            ->addAddressFields();
+	            ->addAttributeToFilter('imported', array('eq' => $data['imported']));
+	        
+	        /* addAddressFields() is called only if version >= 1400 */
+	        if(str_replace('.','',Mage::getVersion()) >= 1400) {
+	        	$collection->addAddressFields();
+	        }
 	            
 	        if(isset($data['limit'])) {
 	        	$collection->setPageSize($data['limit']);
@@ -38,11 +42,28 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
 	        }
 
 	        foreach ($collection as $order) {
-	            $result[] = $this->_getAttributes($order, 'order');
+	        	$tmp = $this->_getAttributes($order, 'order');
+	            
+	        	/* if version < 1400, billing and shipping information are added manually to order data */
+	            if(str_replace('.','',Mage::getVersion()) < 1400) {
+	            	$address_data = $this->_getAttributes($order->getShippingAddress(), 'order_address'); 
+	            	if(!empty($address_data)) {
+	            		$tmp['shipping_firstname'] = $address_data['firstname'];
+	            		$tmp['shipping_lastname'] = $address_data['lastname'];
+	            	}
+	            	
+	            	$address_data = $this->_getAttributes($order->getBillingAddress(), 'order_address');
+	            	if(!empty($address_data)) {
+	            		$tmp['billing_firstname'] = $address_data['firstname'];
+	            		$tmp['billing_lastname'] = $address_data['lastname'];
+	            	}
+	            }
+	            
+	            $result[] = $tmp;
 	        }
 	        return $result;
 		}else{
-			$this->_fault('data_invalid', "erreur, l'attribut 'imported' doit être spécifié");
+			$this->_fault('data_invalid', "Error, the attribut 'imported' need to be specified");
 		}
 	}
 	
