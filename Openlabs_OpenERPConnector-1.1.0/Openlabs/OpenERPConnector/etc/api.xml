@@ -427,6 +427,10 @@
 				<model>openerpconnector/olcatalog_products</model>
 				<acl>catalog/product</acl>
 				<methods>
+					<search translate="title" module="core">
+						<title>Return the list of products ids that match with the filter</title>
+						<method>search</method>
+					</search>
 					<list translate="title" module="core">
 						<title>Enumerate Products</title>
 						<method>items</method>
@@ -492,6 +496,10 @@
                 <model>sales/order_api</model>
                 <title>Custom Sales Orders API</title>
                 <methods>
+                    <search translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Return the list of products ids that match with the filter</title>
+                        <method>search</method>
+                    </search>
                     <retrieve translate="title" module="Openlabs_OpenERPConnector">
                         <title>Retrieve list of orders by filters, nb max, etc...</title>
                         <method>retrieveOrders</method>

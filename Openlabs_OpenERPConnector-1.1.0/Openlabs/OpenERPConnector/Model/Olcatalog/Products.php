@@ -16,6 +16,42 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
     }
 
     /**
+     * Return the list of products ids
+     *
+     * @param array $filters
+     * @param string|int $store
+     * @return array
+     */
+    public function search($filters = null, $store = null)
+    {
+        $collection = Mage::getModel('catalog/product')->getCollection()
+            ->setStoreId($this->_getStoreId($store))
+            ->addAttributeToSelect('name');
+
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $field => $value) {
+                    if (isset($this->_filtersMap[$field])) {
+                        $field = $this->_filtersMap[$field];
+                    }
+
+                    $collection->addFieldToFilter($field, $value);
+                }
+            } catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
+            }
+        }
+
+        $result = array();
+
+        foreach ($collection as $product) {
+            $result[] = $product->getId();
+        }
+
+        return $result;
+    }
+
+    /**
      * Retrieve list of products with basic info (id, sku, type, set, name)
      *
      * @param array $filters
