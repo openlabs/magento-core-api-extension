@@ -8,11 +8,51 @@
 
 class Openlabs_OpenERPConnector_Model_Olcustomer_Customer extends Mage_Catalog_Model_Api_Resource
 {
+
+        protected $_mapFilters = array(
+            'customer_id' => 'entity_id'
+        );
+
+        /**
+         * Return the list of partner ids which match the filters
+         *
+         * @param array $filters
+         * @return array
+         */
+        public function search($filters)
+        {
+            
+            $collection = Mage::getModel('customer/customer')->getCollection()
+                ->addAttributeToSelect('*');
+
+            if (is_array($filters)) {
+                try {
+                    foreach ($filters as $field => $value) {
+                        if (isset($this->_mapFilters[$field])) {
+                            $field = $this->_mapFilters[$field];
+                        }
+
+                        $collection->addFieldToFilter($field, $value);
+                    }
+                } catch (Mage_Core_Exception $e) {
+                    $this->_fault('filters_invalid', $e->getMessage());
+                }
+            }
+
+            $result = array();
+
+            foreach ($collection as $product) {
+                $result[] = $product->getId();
+            }
+
+            return $result;
+        }
+
         public function items($filters=null)
         {
             try
             {
-            $collection = Mage::getModel('customer')->getCollection();//->addAttributeToSelect('*');
+            $collection = Mage::getModel('customer/customer')->getCollection();//->addAttributeToSelect('*');
             }
             catch (Mage_Core_Exception $e)
             {

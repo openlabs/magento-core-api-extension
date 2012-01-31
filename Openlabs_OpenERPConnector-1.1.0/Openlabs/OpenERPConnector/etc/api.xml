@@ -361,6 +361,10 @@
 				<model>openerpconnector/olcustomer_customer</model>
 				<acl>customer/group</acl>
 				<methods>
+				    <search translate="title" module="core">
+				        <title>Return the list of customer ids that match with the filter</title>
+				        <method>search</method>
+				    </search>
 					<list translate="title" module="core">
 						<title>Enumerate Customers</title>
 						<method>items</method>
