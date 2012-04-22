@@ -496,6 +496,35 @@
                     </filters_invalid>
                 </faults>
             </ol_catalog_product_attributeset>
+            <ol_catalog_product_link>
+                <title>Product Link</title>
+                <model>openerpconnector/olcatalog_product_link</model>
+                <acl>catalog/product</acl>
+                <methods>
+                    <list translate="title" module="core">
+                        <title>Enumerate configurable Products</title>
+                        <method>items</method>
+                    </list>
+                    <assign translate="title" module="catalog">
+                        <title>Assign simple product in configurable product</title>
+                    </assign>
+                    <remove translate="title" module="catalog">
+                        <title>Remove simple products in configurable product</title>
+                    </remove>
+                    <listSuperAttributes translate="title" module="catalog">
+                        <title>Get configurable attribute values for a configurable product</title>
+                    </listSuperAttributes>
+                    <createSuperAttribute translate="title" module="catalog">
+                        <title>Create configurable attribute for a configurable product</title>
+                    </createSuperAttribute>
+                    <removeSuperAttribute translate="title" module="catalog">
+                        <title>Remove super attribute</title>
+                    </removeSuperAttribute>
+                    <setSuperAttributeValues translate="title" module="catalog">
+                        <title>Set configurable attribute values for super attribute</title>
+                    </setSuperAttributeValues>
+                </methods>
+            </ol_catalog_product_link>
             <sales_order translate="title" module="Openlabs_OpenERPConnector">
                 <model>sales/order_api</model>
                 <title>Custom Sales Orders API</title>
