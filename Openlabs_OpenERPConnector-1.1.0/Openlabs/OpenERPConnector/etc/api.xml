@@ -549,6 +549,14 @@
                         <title>get The Parent of the order annulated</title>
                         <method>getOrderParent</method>
                     </get_parent>
+                    <get_invoice_ids translate="title" module="Openlabs_OpenERPConnector">
+                        <title>get The Invoices Increment ids of the order</title>
+                        <method>getInvoiceIds</method>
+                    </get_invoice_ids>
+                    <get_shipment_ids translate="title" module="Openlabs_OpenERPConnector">
+                        <title>get The Shipment Increment ids of the order</title>
+                        <method>getShipmentIds</method>
+                    </get_shipment_ids>
                 </methods>
            </sales_order>
            <catalog_product translate="title" module="catalog">

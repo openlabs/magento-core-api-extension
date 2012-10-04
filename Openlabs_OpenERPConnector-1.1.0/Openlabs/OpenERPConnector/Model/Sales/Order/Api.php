@@ -151,4 +151,37 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
         	return false;
         }
     }
+
+    /* Retrieve invoices increment ids of the order */
+    public function getInvoiceIds($incrementId) {
+        $order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
+        /**
+          * Check order existing
+        */
+        if (!$order->getId()) {
+             $this->_fault('order_not_exists');
+        }
+        $res = array();
+        foreach($order->getInvoiceCollection() as $invoice){
+            array_push($res, $invoice->getIncrementId());
+        };
+        return $res;
+    }
+
+    /* Retrieve shipment increment ids of the order */
+    public function getShipmentIds($incrementId) {
+        $order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
+        /**
+          * Check order existing
+        */
+        if (!$order->getId()) {
+             $this->_fault('order_not_exists');
+        }
+        $res = array();
+        foreach($order->getShipmentsCollection() as $shipping){
+            array_push($res, $shipping->getIncrementId());
+        };
+        return $res;
+    }
+
 }
