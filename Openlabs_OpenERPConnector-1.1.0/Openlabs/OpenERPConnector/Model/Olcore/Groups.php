@@ -38,38 +38,38 @@ class Openlabs_OpenERPConnector_Model_Olcore_Groups extends Mage_Catalog_Model_A
             return $result;
         }
 
-	public function info($groupIds = null)
-	{
-		$groups = array();
+    public function info($groupIds = null)
+    {
+        $groups = array();
 
-		if(is_array($groupIds))
-		{
-			foreach($groupIds as $groupId)
-			{
-				try
+        if(is_array($groupIds))
+        {
+            foreach($groupIds as $groupId)
+            {
+                try
                                 {
                                     $groups[] = Mage::getModel('core/store_group')->load($groupId)->toArray();
-				}
+                }
                                 catch (Mage_Core_Exception $e)
                                 {
                                     $this->_fault('group_not_exists');
                                 }
                         }
                         return $groups;
-		}
+        }
                 elseif(is_numeric($groupIds))
-		{
-			try
+        {
+            try
                         {
                             return Mage::getModel('core/store_group')->load($groupIds)->toArray();
-			}
+            }
                         catch (Mage_Core_Exception $e)
                         {
                             $this->_fault('group_not_exists');
                         }
 
                 }
-		
+        
         }
 
         public function create($groupdata)

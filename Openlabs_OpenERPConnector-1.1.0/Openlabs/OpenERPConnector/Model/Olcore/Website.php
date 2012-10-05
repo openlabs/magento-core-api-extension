@@ -9,7 +9,7 @@
 class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_Api_Resource
 {
 
-	public function items($filters=null)
+    public function items($filters=null)
         {
             try
             {
@@ -39,31 +39,31 @@ class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_
             return $result;
         }
 
-	public function info($storeIds = null)
-	{
-		$stores = array();
+    public function info($storeIds = null)
+    {
+        $stores = array();
 
-		if(is_array($storeIds))
-		{
-			foreach($storeIds as $storeId)
-			{
-				try
+        if(is_array($storeIds))
+        {
+            foreach($storeIds as $storeId)
+            {
+                try
                                 {
                                     $stores[] = Mage::getModel('core/website')->load($storeId)->toArray();
-				}
+                }
                                 catch (Mage_Core_Exception $e)
                                 {
                                     $this->_fault('store_not_exists');
                                 }
                         }
                         return $stores;
-		}
+        }
                 elseif(is_numeric($storeIds))
-		{
-			try
+        {
+            try
                         {
                             return Mage::getModel('core/website')->load($storeIds)->toArray();
-			}
+            }
                         catch (Mage_Core_Exception $e)
                         {
                             $this->_fault('store_not_exists');
@@ -72,9 +72,9 @@ class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_
                 }
 
         }
-	//This is a protected function used by items & info for fetching website information
-	
-	public function create($websitedata)
+    //This is a protected function used by items & info for fetching website information
+    
+    public function create($websitedata)
         {
             try
             {
@@ -141,31 +141,31 @@ class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_
             return true;
         }
         
-	public function tree()
-	{
-		$tree = array();
-		
-		$websites = $this->websites();
-		
-		foreach($websites as $website)
-		{
-			$groups = $this->groups($website['group_ids']);	
-			$tree[$website['code']] = $website;
-			foreach($groups as $group)
-			{
-				$stores = $this->stores($group["store_ids"]);
-				
-				$tree[$website['code']]['groups']['group_'.$group['group_id']] = $group;
-				
-				foreach($stores as $store)
-				{
-					$tree[$website['code']]['groups']['group_'.$group['group_id']]['stores'][$store['code']] = $store;
-				}
-			}
-		}
+    public function tree()
+    {
+        $tree = array();
+        
+        $websites = $this->websites();
+        
+        foreach($websites as $website)
+        {
+            $groups = $this->groups($website['group_ids']);    
+            $tree[$website['code']] = $website;
+            foreach($groups as $group)
+            {
+                $stores = $this->stores($group["store_ids"]);
+                
+                $tree[$website['code']]['groups']['group_'.$group['group_id']] = $group;
+                
+                foreach($stores as $store)
+                {
+                    $tree[$website['code']]['groups']['group_'.$group['group_id']]['stores'][$store['code']] = $store;
+                }
+            }
+        }
 
-		return $tree;
-	}
-	
+        return $tree;
+    }
+    
 }
 ?>

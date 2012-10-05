@@ -61,12 +61,12 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Product_Link extends Mage_Catalo
             $productIds[$prodId] = $prodId;
         }
 
-        if(is_array($linkedProductIds))	{
+        if(is_array($linkedProductIds))    {
             foreach($linkedProductIds as $prodId)
             {
                 if(!key_exists($prodId,$productIds)) {$productIds[$prodId] = $prodId;}
             }
-        } elseif(is_numeric($linkedProductIds))	{
+        } elseif(is_numeric($linkedProductIds))    {
             if(!key_exists($linkedProductIds,$productIds)) {$productIds[$linkedProductIds] = $linkedProductIds;}
         } else {
             return false;
@@ -212,7 +212,7 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Product_Link extends Mage_Catalo
                 $superAttr->setStoreId($storeID);
                 $superAttr->setLabel($label);
                 $superAttr->save();
-            }	
+            }    
         }
         
         if(is_array($prices))

@@ -122,22 +122,22 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
                 $this->_fault('filters_invalid', $e->getMessage());
             }
         }
-		foreach ($collection as $product) {
-	        $data = array();
-	        $data = array( // Basic product data
-	            'product_id' => $product->getId(),
-	            'sku'        => $product->getSku(),
-	            'set'        => $product->getAttributeSetId(),
-	            'type'       => $product->getTypeId(),
-	            'categories' => $product->getCategoryIds(),
-	            'websites'   => $product->getWebsiteIds()
-	        );
+        foreach ($collection as $product) {
+            $data = array();
+            $data = array( // Basic product data
+                'product_id' => $product->getId(),
+                'sku'        => $product->getSku(),
+                'set'        => $product->getAttributeSetId(),
+                'type'       => $product->getTypeId(),
+                'categories' => $product->getCategoryIds(),
+                'websites'   => $product->getWebsiteIds()
+            );
 
-	        foreach ($product->getTypeInstance(true)->getEditableAttributes($product) as $attribute) {
-	                $data[$attribute->getAttributeCode()] = $product->getData($attribute->getAttributeCode());
-	        }
-	        $result[]=$data;
-		}
+            foreach ($product->getTypeInstance(true)->getEditableAttributes($product) as $attribute) {
+                    $data[$attribute->getAttributeCode()] = $product->getData($attribute->getAttributeCode());
+            }
+            $result[]=$data;
+        }
         return $result;
     }
 
@@ -245,7 +245,7 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
      *
      *  @param    Mage_Catalog_Model_Product $product
      *  @param    array $productData
-     *  @return	  object
+     *  @return      object
      */
     protected function _prepareDataForSave ($product, $productData)
     {

@@ -38,38 +38,38 @@ class Openlabs_OpenERPConnector_Model_Olcore_Storeviews extends Mage_Catalog_Mod
             return $result;
         }
 
-	public function info($storeIds = null)
-	{
-		$stores = array();
+    public function info($storeIds = null)
+    {
+        $stores = array();
 
-		if(is_array($storeIds))
-		{
-			foreach($storeIds as $storeId)
-			{
-				try
+        if(is_array($storeIds))
+        {
+            foreach($storeIds as $storeId)
+            {
+                try
                                 {
                                     $stores[] = Mage::getModel('core/store')->load($storeId)->toArray();
-				}
+                }
                                 catch (Mage_Core_Exception $e)
                                 {
                                     $this->_fault('store_not_exists');
                                 }
                         }
                         return $stores;
-		}
+        }
                 elseif(is_numeric($storeIds))
-		{
-			try
+        {
+            try
                         {
                             return Mage::getModel('core/store')->load($storeIds)->toArray();
-			}
+            }
                         catch (Mage_Core_Exception $e)
                         {
                             $this->_fault('store_not_exists');
                         }
 
                 }
-		
+        
         }
 
         public function create($storedata)

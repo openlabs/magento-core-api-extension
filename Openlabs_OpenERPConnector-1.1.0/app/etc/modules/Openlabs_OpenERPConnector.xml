@@ -34,7 +34,7 @@
             <active>true</active>
             <depends>
                 <Mage_Api />
-		    <Mage_Catalog />
+                <Mage_Catalog />
             </depends>
         </Openlabs_OpenERPConnector>
     </modules>
