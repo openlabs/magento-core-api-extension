@@ -570,6 +570,45 @@
                     </create_bundle>
                 </methods>
            </catalog_product>
+            <oerp_catalog_category translate="title" module="Openlabs_OpenERPConnector">
+                <title>Product Category API</title>
+                <model>openerpconnector/oerpcatalog_category_api</model>
+                <acl>catalog/category/move</acl>
+                <methods>
+                    <move translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Move category in tree</title>
+                        <method>move</method>
+                    </move>
+                </methods>
+            </oerp_catalog_category>
+
+            <oerp_cataloginventory_stock_item translate="title" module="Openlabs_OpenERPConnector">
+                <model>openerpconnector/oerpstock_item_api</model>
+                <title>Inventory API</title>
+                <acl>cataloginventory</acl>
+                <methods>
+                    <update translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Update product stock data</title>
+                        <acl>cataloginventory/update</acl>
+                        <method>update</method>
+                    </update>
+                    <massive_update translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Massive Update product stock data</title>
+                        <acl>cataloginventory/update</acl>
+                        <method>massive_update</method>
+                    </massive_update>
+                </methods>
+                <faults module="cataloginventory">
+                    <product_not_exists>
+                        <code>101</code>
+                        <message>Product not exists.</message>
+                    </product_not_exists>
+                    <not_updated>
+                        <code>102</code>
+                        <message>Product inventory not updated. Details in error message.</message>
+                    </not_updated>
+                </faults>
+            </oerp_cataloginventory_stock_item>
         </resources>
     </api>
 </config>
