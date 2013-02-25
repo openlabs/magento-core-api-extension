@@ -8,6 +8,31 @@
 
 class Openlabs_OpenERPConnector_Model_Olcore_Storeviews extends Mage_Catalog_Model_Api_Resource
 {
+
+    /**
+     * Return the list of storeviews ids which match the filters
+     *
+     * @param array $filters
+     * @return array
+     */
+    public function search($filters)
+    {
+
+        $collection = Mage::getModel('core/store')->getCollection();
+
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $field => $value) {
+                    $collection->addFieldToFilter($field, $value);
+                }
+            } catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
+            }
+        }
+
+        return $collection->getAllIds();
+    }
+
         public function items($filters=null)
         {
             try

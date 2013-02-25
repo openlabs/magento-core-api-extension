@@ -49,6 +49,10 @@
                 <model>openerpconnector/olcore_groups</model>
                 <acl>core/store</acl>
                 <methods>
+                    <search translate="title" module="core">
+                        <title>Return the list of groups ids that match with the filter</title>
+                        <method>search</method>
+                    </search>
                     <list translate="title" module="core">
                         <title>Enumerate groups</title>
                         <method>items</method>
@@ -91,6 +95,10 @@
                 <model>openerpconnector/olcore_storeviews</model>
                 <acl>core/store</acl>
                 <methods>
+                    <search translate="title" module="core">
+                        <title>Return the list of storeviews ids that match with the filter</title>
+                        <method>search</method>
+                    </search>
                     <list translate="title" module="core">
                         <title>Enumerate stores</title>
                         <method>items</method>

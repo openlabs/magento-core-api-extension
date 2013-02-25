@@ -10,7 +10,7 @@ class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_
 {
 
     /**
-     * Return the list of partner ids which match the filters
+     * Return the list of website ids which match the filters
      *
      * @param array $filters
      * @return array
