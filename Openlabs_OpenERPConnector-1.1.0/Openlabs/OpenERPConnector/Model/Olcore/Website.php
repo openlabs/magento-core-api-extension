@@ -9,6 +9,30 @@
 class Openlabs_OpenERPConnector_Model_Olcore_Website extends Mage_Catalog_Model_Api_Resource
 {
 
+    /**
+     * Return the list of partner ids which match the filters
+     *
+     * @param array $filters
+     * @return array
+     */
+    public function search($filters)
+    {
+
+        $collection = Mage::getModel('core/website')->getCollection();
+
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $field => $value) {
+                    $collection->addFieldToFilter($field, $value);
+                }
+            } catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
+            }
+        }
+
+        return $collection->getAllIds();
+    }
+
     public function items($filters=null)
         {
             try

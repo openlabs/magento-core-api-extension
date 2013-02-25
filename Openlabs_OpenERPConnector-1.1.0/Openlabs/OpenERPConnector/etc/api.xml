@@ -7,6 +7,10 @@
                 <model>openerpconnector/olcore_website</model>
                 <acl>core/store</acl>
                 <methods>
+                    <search translate="title" module="core">
+                        <title>Return the list of website ids that match with the filter</title>
+                        <method>search</method>
+                    </search>
                     <list translate="title" module="core">
                         <title>Enumerate websites</title>
                         <method>items</method>
