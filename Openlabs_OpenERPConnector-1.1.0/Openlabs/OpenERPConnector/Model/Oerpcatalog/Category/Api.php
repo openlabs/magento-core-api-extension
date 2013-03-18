@@ -24,6 +24,42 @@
 class Openlabs_OpenERPConnector_Model_Oerpcatalog_category_api extends Mage_Catalog_Model_Category_Api
 {
 
+    /**
+     * Return the list of products category ids
+     *
+     * @param array $filters
+     * @param string|int $store
+     * @return array
+     */
+    public function search($filters = null, $store = null)
+    {
+        $collection = Mage::getModel('catalog/category')->getCollection()
+            ->setStoreId($this->_getStoreId($store))
+            ->addAttributeToSelect('name');
+
+        if (is_array($filters)) {
+            try {
+                foreach ($filters as $field => $value) {
+                    if (isset($this->_filtersMap[$field])) {
+                        $field = $this->_filtersMap[$field];
+                    }
+
+                    $collection->addFieldToFilter($field, $value);
+                }
+            } catch (Mage_Core_Exception $e) {
+                $this->_fault('filters_invalid', $e->getMessage());
+            }
+        }
+
+        $result = array();
+
+        foreach ($collection as $product) {
+            $result[] = $product->getId();
+        }
+
+        return $result;
+    }
+
     public function move($categoryId, $parentId, $afterId = null)
     {
         $category = $this->_initCategory($categoryId);

@@ -587,6 +587,10 @@
                 <model>openerpconnector/oerpcatalog_category_api</model>
                 <acl>catalog/category/move</acl>
                 <methods>
+                    <search translate="title" module="core">
+                        <title>Return the list of product category ids that match with the filter</title>
+                        <method>search</method>
+                    </search>
                     <move translate="title" module="Openlabs_OpenERPConnector">
                         <title>Move category in tree</title>
                         <method>move</method>
