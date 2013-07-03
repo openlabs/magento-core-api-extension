@@ -569,6 +569,10 @@
                         <title>get The Shipment Increment ids of the order</title>
                         <method>getShipmentIds</method>
                     </get_shipment_ids>
+                    <get_order_states translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Fetch all the available states for an order</title>
+                        <method>getOrderStates</method>
+                    </get_order_states>
                 </methods>
            </sales_order>
            <catalog_product translate="title" module="catalog">

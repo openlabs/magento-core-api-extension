@@ -152,6 +152,12 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
         }
     }
 
+    /* Retrieve order states */
+    public function getOrderStates() {
+        return Mage::getSingleton("sales/order_config")->getStates();
+    }
+
+
     /* Retrieve invoices increment ids of the order */
     public function getInvoiceIds($incrementId) {
         $order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
