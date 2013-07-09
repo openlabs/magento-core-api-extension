@@ -573,6 +573,10 @@
                         <title>Fetch all the available states for an order</title>
                         <method>getOrderStates</method>
                     </get_order_states>
+                    <shipping_methods translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Fetch all the available Shipment Methods</title>
+                        <method>get_all_shipping_methods</method>
+                    </shipping_methods>
                 </methods>
            </sales_order>
            <catalog_product translate="title" module="catalog">
