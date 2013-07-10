@@ -3,6 +3,7 @@
 /**
  *
  * @author     Mohammed NAHHAS
+ * @author     Openlabs
  * @package Openlabs_OpenERPConnector
  *
  */
@@ -152,6 +153,12 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
         }
     }
 
+    /* Retrieve order states */
+    public function getOrderStates() {
+        return Mage::getSingleton("sales/order_config")->getStates();
+    }
+
+
     /* Retrieve invoices increment ids of the order */
     public function getInvoiceIds($incrementId) {
         $order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
@@ -184,4 +191,22 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
         return $res;
     }
 
+    /**
+     * Return the list of Shipment Methods
+     * @return array
+     */
+    public function get_all_shipping_methods()
+    {
+        $methods = Mage::getSingleton('shipping/config')->getActiveCarriers();
+
+        $options = array();
+        foreach($methods as $_code => $_method)
+        {
+            if(!$_title = Mage::getStoreConfig("carriers/$_code/title"))
+                $_title = $_code;
+
+            $options[] = array('code' => $_code, 'label' => $_title);
+        }
+        return $options;
+    }
 }

@@ -22,10 +22,10 @@ Contact sharoon.thomas@openlabs.co.in for further details</description>
   <email>sharoonthomas@teagarden.in</email>
   <active>yes</active>
  </lead>
- <date>2009-08-27</date>
- <time>15:23:56</time>
+ <date>2013-07-10</date>
+ <time>11:23:00</time>
  <version>
-  <release>1.1.0</release>
+  <release>1.4.0</release>
   <api>2.0</api>
  </version>
  <stability>
