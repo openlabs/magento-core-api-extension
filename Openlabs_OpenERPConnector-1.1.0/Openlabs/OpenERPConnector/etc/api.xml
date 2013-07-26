@@ -588,6 +588,10 @@
                         <title>Create Bundle Products with Custom Options and Bundle Items</title>
                         <method>createBundleProducts</method>
                     </create_bundle>
+                    <root_category translate="title" module="Openlabs_OpenERPConnector">
+                        <title>Return root category information</title>
+                        <method>get_root_category</method>
+                    </root_category>
                 </methods>
            </catalog_product>
             <oerp_catalog_category translate="title" module="Openlabs_OpenERPConnector">

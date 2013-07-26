@@ -2,6 +2,7 @@
 
 /**
  * @author     Mohammed NAHHAS
+ * @author     Openlabs
  * @package Openlabs_OpenERPConnector
  */
 
@@ -76,5 +77,36 @@ class Openlabs_OpenERPConnector_Model_Catalog_Product_Api extends Mage_Catalog_M
             $product->setAffectBundleProductSelections(true);
             Mage::register('product', $product);  // product must be registred in order to get the store_id, see _beforeSave() in Mage/Bundle/Model/Selection.php
         }
+    }
+
+    /**
+     * Return an array with root category information
+     * @return array
+     */
+    public function get_root_category()
+    {
+        $category = Mage::getModel('catalog/category');
+        $tree = $category->getTreeModel();
+        $tree->load();
+
+        $ids = $tree->getCollection()->getAllIds();
+        if (isset($ids) && !empty($ids)) {
+            // Check if ids exist
+            foreach ($ids as $id) {
+                // Find root category from all ids of categories by checking
+                // the path length, it should be 1 for root category
+                $category->load($id);
+                $path = explode('/', $category->getPath());
+                if (count($path)==1 && !empty($path[0])) {
+                    // Path length is 1, so return category info
+                    return array(
+                        'id' => $id,
+                        'name' => $category->getName(),
+                        'description' => $category->getDescription(),
+                    );
+                }
+            }
+        }
+        return False;
     }
 }
