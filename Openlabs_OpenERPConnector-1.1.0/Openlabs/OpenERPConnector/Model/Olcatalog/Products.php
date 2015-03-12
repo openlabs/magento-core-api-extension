@@ -52,7 +52,14 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
     }
 
     /**
-     * Retrieve list of products with basic info (id, sku, type, set, name)
+     * Retrieve list of products with the following info -:
+     * id: Magento Product Id
+     * sku: Product Sku
+     * type: Product Type (simple, downloadable, virtual, etc)
+     * set: Product Set
+     * name: Product Name
+     * up_sells: Array of up_sell Ids
+     * cross_sells: Array of cross_sell Ids
      *
      * @param array $filters
      * @param string|int $store
@@ -88,9 +95,21 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
                 'name'       => $product->getName(),
                 'set'        => $product->getAttributeSetId(),
                 'type'       => $product->getTypeId(),
-                'category_ids'       => $product->getCategoryIds()
-            );
-        }
+	        'category_ids'       => $product->getCategoryIds(),
+	        'up_sells'   => array(),
+	        'cross_sells'        => array(),
+	    );
+
+	    // Get UpSells
+	    foreach ($product->getUpSellProductCollection() as $up_sell) {
+	        array_push($result['up_sells'], $up_sell->getId())
+	    }
+
+            // Get CrossSells
+	    foreach ($product->getCrossSellProducts() as $cross_sell) {
+		array_push($result['cross_sells'], $cross_sell->getId())
+	    }
+}
 
         return $result;
     }
