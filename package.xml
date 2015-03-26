@@ -22,15 +22,15 @@ Contact sharoon.thomas@openlabs.co.in for further details</description>
   <email>sharoonthomas@teagarden.in</email>
   <active>yes</active>
  </lead>
- <date>2013-07-10</date>
- <time>11:23:00</time>
+ <date>2015-03-26</date>
+ <time>13:46:00</time>
  <version>
-  <release>1.4.0</release>
+  <release>1.5.0</release>
   <api>2.0</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>stable</release>
+  <api>stable</api>
  </stability>
  <license>GPL</license>
  <notes>Magento Websites API
