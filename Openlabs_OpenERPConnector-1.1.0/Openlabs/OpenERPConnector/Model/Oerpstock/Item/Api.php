@@ -26,10 +26,18 @@
 
 class Openlabs_OpenERPConnector_Model_Oerpstock_item_api extends Mage_CatalogInventory_Model_Stock_Item_Api
 {
-
     protected function _getProduct($productId, $store = null, $identifierType = 'id')
     {
-        $product = Mage::helper('catalog/product')->getProduct($productId, $this->_getStoreId($store), $identifierType);
+        if(is_callable(array(Mage::helper('catalog/product'), 'getProduct'))){
+            $product = Mage::helper('catalog/product')->getProduct($productId, $this->_getStoreId($store), $identifierType);
+        } else {
+            /* support for older magento versions, e.g. 1.4.2.0 */
+            $product = Mage::getModel('catalog/product')->setStoreId(Mage::app()->getStore($store)->getId());
+            if($identifierType == 'id'){
+                $product->load((int) $productId);
+            }
+        }
+
         if (is_null($product->getId())) {
             $this->_fault('product_not_exists');
         }
@@ -46,7 +54,7 @@ class Openlabs_OpenERPConnector_Model_Oerpstock_item_api extends Mage_CatalogInv
 
         if (!$stockItemId) {
              $stockItem->setData('product_id', $productId);
-             $stockItem->setData('stock_id', 1); 
+             $stockItem->setData('stock_id', 1);
         } else {
              $stock = $stockItem->getData();
         }

@@ -31,6 +31,11 @@
                     <product_api>Openlabs_OpenERPConnector_Model_Catalog_Product_Api</product_api>
                 </rewrite>
             </catalog>
+            <cataloginventory>
+                <rewrite>
+                    <stock_item_api>Openlabs_OpenERPConnector_Model_Oerpstock_Item_Api</stock_item_api>
+                </rewrite>
+            </cataloginventory>            
         </models>
         <resources>
             <openerpconnector_setup>
