@@ -61,6 +61,11 @@
             <openerpconnector>
                 <class>Openlabs_OpenERPConnector_Helper</class>
             </openerpconnector>
+            <catalog>
+                <rewrite>
+                    <product>Openlabs_OpenERPConnector_Helper_Product</product>
+                </rewrite>
+            </catalog>
         </helpers>
         <events>
             <sales_order_place_after>
