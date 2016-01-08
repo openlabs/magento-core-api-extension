@@ -38,7 +38,6 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
             foreach ($collection as $order) {
                 $result[] =  $order['increment_id'];
             }
-            Mage::log(Zend_Debug::dump($result, 'Search_', false), null, 'orders_oerp.log');
             return $result;
         }else{
             $this->_fault('data_invalid', "Error, the attribut 'imported' need to be specified");
