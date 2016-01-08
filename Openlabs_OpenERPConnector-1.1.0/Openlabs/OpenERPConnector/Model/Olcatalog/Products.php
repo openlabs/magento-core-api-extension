@@ -193,7 +193,7 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
 
     /**
      * Update product data
-     *
+     * 
      * @param int|string $productId
      * @param array $productData
      * @param string|int $store
@@ -201,6 +201,18 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
      */
     public function update($productId, $productData = array(), $store = null)
     {
+        /**
+         * There is a problem with IDs, and SKUs. OpenERP sends the SKU as $productId's value, but maybe
+         * this SKU has the same value than an existent product ID, so magento will write the product info.
+         * on another product.
+         * 
+         * Adding a whitespace at the end of the product identifier, it's treated as a string.
+         * Of this way, the magento helper will first try to find an ID with the SKU, and if nothing is found
+         * it will try to use de ID to get the product directly
+         * 
+         * @author  Daniel Lozano Morales dn.lozano.m@gmail.com
+         */
+        $productId = (string) $productId;
         $product = $this->_getProduct($productId, $store);
 
         if (!$product->getId()) {
@@ -301,6 +313,9 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
     }
 
     /**
+     * TODO: Maybe here happens the same issue with sku/ids mess. Test it, but i think it will happen because ERP will send the SKU, and it will be treated as an ID.
+     * @author  Daniel Lozano Morales dn.lozano.m@gmail.com
+     * 
      * Delete product
      *
      * @param int|string $productId
@@ -321,5 +336,16 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
         }
 
         return true;
+    }
+    
+    public function info($productId, $store = null, $attributes = null, $identifierType = null)
+    {
+        $result = Mage::getSingleton('catalog/product_api')->info($productId, $store, $attributes, $identifierType);
+        $resultObject = new Varien_Object($result);
+        $type = $result['type'];
+        Mage::dispatchEvent('ol_openerp_catalog_product_info_type_'.$type, array(
+                'result_object' => $resultObject, 'product_id' => $productId, 'store' => $store));
+
+        return $resultObject->getData();
     }
 } // Class Mage_Catalog_Model_Product_Api End

@@ -35,7 +35,7 @@
                 <rewrite>
                     <stock_item_api>Openlabs_OpenERPConnector_Model_Oerpstock_Item_Api</stock_item_api>
                 </rewrite>
-            </cataloginventory>            
+            </cataloginventory>
         </models>
         <resources>
             <openerpconnector_setup>
@@ -82,6 +82,15 @@
                     </init_imported_after_place_order>
                 </observers>
             </sales_order_place_after>
+            <ol_openerp_catalog_product_info_type_bundle>
+                <observers>
+                    <ol_openerpconnect_addbundleinfo>
+                        <type>singleton</type>
+                        <class>openerpconnector/olcatalog_product_observer_bundle</class>
+                        <method>addBundleInfo</method>
+                    </ol_openerpconnect_addbundleinfo>
+                </observers>
+            </ol_openerp_catalog_product_info_type_bundle>
         </events>
     </global>
     <admin>

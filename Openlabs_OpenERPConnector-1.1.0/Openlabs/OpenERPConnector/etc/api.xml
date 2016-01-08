@@ -467,6 +467,10 @@
                         <title>Delete groups</title>
                         <method>delete</method>
                     </delete>
+                    <info translate="title" module="core">
+                        <title>Retrieve product</title>
+                        <method>info</method>
+                    </info>
                 </methods>
                 <faults module="core">
                     <customer_not_exists>
