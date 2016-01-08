@@ -3,13 +3,12 @@
 /**
  *
  * @author     Mohammed NAHHAS
- * @author     Openlabs
  * @package Openlabs_OpenERPConnector
  *
  */
 
-class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_Order_Api {
-
+class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_Order_Api 
+{
     /**
      * Return the list of products ids that match with the filter
      * The filter imported is required
@@ -17,7 +16,6 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
      * @return array
      */
     public function search($data) {
-
         $result = array();
         if(isset($data['imported'])) {
 
@@ -40,7 +38,6 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
             foreach ($collection as $order) {
                 $result[] =  $order['increment_id'];
             }
-
             return $result;
         }else{
             $this->_fault('data_invalid', "Error, the attribut 'imported' need to be specified");
@@ -55,7 +52,6 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
      * @return array
      */
     public function retrieveOrders($data) {
-
         $result = array();
         if(isset($data['imported'])) {
 
@@ -99,6 +95,7 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
                 }
 
                 $result[] = $tmp;
+                Mage::log(Zend_Debug::dump($result, 'Order_', false), null, 'orders_oerp.log');
             }
             return $result;
         }else{
@@ -119,7 +116,6 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
 
     /* Retrieve increment_id of the child order */
     public function getOrderChild($incrementId) {
-
         $order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
         /**
           * Check order existing
@@ -137,7 +133,6 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
 
     /* Retrieve increment_id of the parent order */
     public function getOrderParent($incrementId) {
-
         $order = Mage::getModel('sales/order')->loadByIncrementId($incrementId);
         /**
           * Check order existing
@@ -152,12 +147,6 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
             return false;
         }
     }
-
-    /* Retrieve order states */
-    public function getOrderStates() {
-        return Mage::getSingleton("sales/order_config")->getStates();
-    }
-
 
     /* Retrieve invoices increment ids of the order */
     public function getInvoiceIds($incrementId) {
@@ -191,22 +180,4 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
         return $res;
     }
 
-    /**
-     * Return the list of Shipment Methods
-     * @return array
-     */
-    public function get_all_shipping_methods()
-    {
-        $methods = Mage::getSingleton('shipping/config')->getActiveCarriers();
-
-        $options = array();
-        foreach($methods as $_code => $_method)
-        {
-            if(!$_title = Mage::getStoreConfig("carriers/$_code/title"))
-                $_title = $_code;
-
-            $options[] = array('code' => $_code, 'label' => $_title);
-        }
-        return $options;
-    }
 }
