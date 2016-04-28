@@ -1,0 +1,5 @@
+# App etc
+app/etc/modules/Openlabs_OpenERPConnector.xml   app/etc/modules/Openlabs_OpenERPConnector.xml
+
+# App code
+app/code/community/Openlabs/OpenERPConnector    app/code/community/Openlabs/OpenERPConnector

@@ -225,7 +225,9 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
 
         foreach ($product->getTypeInstance(true)->getEditableAttributes($product) as $attribute) {
             if ($this->_isAllowedAttribute($attribute)
-                && isset($productData[$attribute->getAttributeCode()])) {
+                && isset($productData[$attribute->getAttributeCode()])
+                && $this->canUpdateAttribute($attribute) // Comprobar si está dentro de los atributos sincronizados
+                ) {
                 $product->setData(
                     $attribute->getAttributeCode(),
                     $productData[$attribute->getAttributeCode()]
@@ -347,5 +349,27 @@ class Openlabs_OpenERPConnector_Model_Olcatalog_Products extends Mage_Catalog_Mo
                 'result_object' => $resultObject, 'product_id' => $productId, 'store' => $store));
 
         return $resultObject->getData();
+    }
+
+    /**
+     * Comprobar si debemos actualizar o no estos atributos.
+     * La versión 6.1 de OpenERP permite 'desincronizar' atributos, pero
+     * sigue pisándolos por lo que hacemos la selección desde la parte 
+     * de Magento.
+     * 
+     * @author Daniel Lozano Morales <daniel.lozano@juguetronica.com>
+     * @param  Mage_Catalog_Model_Resource_Eav_Attribute $attribute
+     * @return bool
+     */
+    private function canUpdateAttribute($attribute) {
+
+        $ignoredAttrs = Mage::getStoreConfig('openerpconnector/productexport/attributes', Mage::app()->getStore());
+
+        $attributeCode = $attribute->getData('attribute_code');
+
+        if (strpos($ignoredAttrs, $attributeCode) > -1) {
+            return false;
+        }
+        return true;
     }
 } // Class Mage_Catalog_Model_Product_Api End

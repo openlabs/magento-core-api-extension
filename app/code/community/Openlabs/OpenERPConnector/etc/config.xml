@@ -80,6 +80,11 @@
                         <class>openerpconnector/observer</class>
                         <method>initImported</method>
                     </init_imported_after_place_order>
+                    <add_cash_on_delivery_fee>
+                        <type>singleton</type>
+                        <class>openerpconnector/observer</class>
+                        <method>addCashOnDelivery</method>
+                    </add_cash_on_delivery_fee>
                 </observers>
             </sales_order_place_after>
             <ol_openerp_catalog_product_info_type_bundle>
@@ -95,13 +100,37 @@
     </global>
     <admin>
         <routers>
-            <openerpconnector>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Openlabs_OpenERPConnector</module>
-                    <frontName>connector</frontName>
+                    <modules>
+                        <openerpconnector before="Mage_Adminhtml">Openlabs_OpenERPConnector_Adminhtml</openerpconnector>
+                    </modules>
                 </args>
-            </openerpconnector>
+            </adminhtml>
         </routers>
     </admin>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <openerpconnector>
+                                            <title>OpenErp Connector - All</title>
+                                        </openerpconnector>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
 </config>

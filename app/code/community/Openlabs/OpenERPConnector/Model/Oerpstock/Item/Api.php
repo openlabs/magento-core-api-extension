@@ -48,22 +48,29 @@ class Openlabs_OpenERPConnector_Model_Oerpstock_item_api extends Mage_CatalogInv
     {
         // test if product exist
         $product = $this->_getProduct($productId);
+        /**
+         * Comprobar si ha de actualizarse o no el stock del
+         * producto
+         *
+         * @author  Daniel Lozano Morales <daniel.lozano@juguetronica.com>
+         */
+        if ($this->canUpdateStock($product)) {
+            $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($productId);
+            $stockItemId = $stockItem->getId();
 
-        $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($productId);
-        $stockItemId = $stockItem->getId();
+            if (!$stockItemId) {
+                 $stockItem->setData('product_id', $productId);
+                 $stockItem->setData('stock_id', 1);
+            } else {
+                 $stock = $stockItem->getData();
+            }
 
-        if (!$stockItemId) {
-             $stockItem->setData('product_id', $productId);
-             $stockItem->setData('stock_id', 1);
-        } else {
-             $stock = $stockItem->getData();
+            foreach($data as $field=>$value) {
+                $stockItem->setData($field, $value?$value:0);
+            }
+
+            $stockItem->save();
         }
-
-        foreach($data as $field=>$value) {
-            $stockItem->setData($field, $value?$value:0);
-        }
-
-        $stockItem->save();
         return true;
     }
 
@@ -78,6 +85,37 @@ class Openlabs_OpenERPConnector_Model_Oerpstock_item_api extends Mage_CatalogInv
             $this->_updateStock($productId, $data);
         }
     return true;
+    }
+
+    /**
+     * Comprobar si hay que actualizar o no el stock del
+     * producto.
+     *
+     * Se ha añadido una nueva característica al módulo que permite
+     * seleccionar categorías de las cuales el stock de sus productos
+     * no será actualizado desde OpenERP.
+     *
+     * @author Daniel Lozano Morales <daniel.lozano@juguetronica.com>
+     * @return bool
+     */
+    private function canUpdateStock($product)
+    {
+        $selectedIds = Mage::getStoreConfig('openerpconnector/stockmanual/categories', Mage::app()->getStore());
+        
+        if (empty($selectedIds) || null === $selectedIds) {
+            return true;
+        }
+
+        $productCategoryIds = $product->getCategoryIds();
+        $selectedIds = explode(',', $selectedIds);
+
+        $intersect = array_intersect($selectedIds, $productCategoryIds);
+
+        // si count() es que hay coincidencias, por lo que interesa saltar.
+        if (count($intersect)) {
+            return false;
+        }
+        return true;
     }
 
 } // Class Mage_CatalogInventory_Model_Stock_Item_Api End
